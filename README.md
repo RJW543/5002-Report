@@ -27,3 +27,8 @@ Q4
 Q5
 ![alt text](Q5-1.png)
 ![alt text](Q5-2.png)
+
+Q6
+
+Q7
+![alt text](Q7-1.png)
