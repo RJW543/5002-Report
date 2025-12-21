@@ -36,3 +36,6 @@ Q7
 Q8
 ![alt text](Q8-1.png)
 ![alt text](Q8-2.png)
+
+This report details the forensic investigation into a suspected security incident affecting "Frothly," a brewing company. Acting in the capacity of a Security Operations Centre (SOC) analyst, the objective of this task was to establish situational awareness i.e. the real-time perception, comprehension, and projection of cybersecurity events—regarding potential malicious activity within the corporate network.
+The investigation was conducted using Splunk Enterprise, a Security Information and Event Management (SIEM) platform, to correlate and analyse telemetry from the BOTSv3 (Boss of the SOC) dataset. This dataset simulates a realistic enterprise environment, containing logs from diverse sources including Windows Event Logs, Sysmon, Osquery, and network stream data.
