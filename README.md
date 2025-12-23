@@ -140,13 +140,17 @@ The BOTSv3 dataset was ingested using a pre-indexed app to ensure data integrity
 - Installation: The BOTSv3 app was installed via Splunk Web Interface (Manage Apps > Install app from file), preserving original timestamps, sourcetypes, and host extractions
 - Index Segregation: All data was confined to index=botsv3, mirroring production SOC environments where investigation data is segregated to prevent cross-contamination and optimise search performance
 
+![](<Splunk initial.png>)
+
+Figure 2- Splunk initialisation
+
 ![](image-3.png)
 
-Figure 2 - BOTSv3 downloaded
+Figure 3 - BOTSv3 downloaded
 
 ![](image-4.png)
 
-Figure 3 - BOTSv3 ingested
+Figure 4 - BOTSv3 ingested
 
 ## 4.3 Validation & Due Diligence
 
@@ -157,7 +161,7 @@ Validation Steps Taken:
 
 ![](image-5.png)
 
-Figure 4 - OneDrive activity distribution from Office 365 logs showing FileAccessed (760 events) as the dominant operation type, confirming cloud telemetry ingestion.
+Figure 5 - OneDrive activity distribution from Office 365 logs showing FileAccessed (760 events) as the dominant operation type, confirming cloud telemetry ingestion.
 
 ## 4.4 Challenges & Field Extraction
 
@@ -181,7 +185,7 @@ The investigation began by analysing Cloud audit logs (ms:o365:management) to id
 
 ![alt text](image-6.png)
 
-Figure 5 - Office 365 logs revealing the attacker's User Agent string.
+Figure 6 - Office 365 logs revealing the attacker's User Agent string.
 
 **SOC Relevance:**
 
@@ -228,7 +232,7 @@ index=botsv3 sourcetype="stream:smtp"
 
 ![alt text](image-7.png)
 
-Figure 6 - shows the email/attachment search returning the macro-enabled document name from within the alert text.
+Figure 7 - shows the email/attachment search returning the macro-enabled document name from within the alert text.
 
 **SOC Relevance:**
 
@@ -272,9 +276,9 @@ index=botsv3 pn="HxTsr.exe"
 
 ![alt text](image-8.png)
 
-Figure 7
+Figure 8
 
-**Figure 7 shows:**
+**Figure 8 shows:**
 
 - The Sysmon-based attempt returning no results (justifying the pivot).
 - The pn=\*.exe | stats count by pn enumeration where HxTsr.exe appears as a standout executable.
@@ -311,7 +315,7 @@ index=botsv3 host="hoth" useradd
 
 ![alt text](image-9.png)
 
-Figure 8 - Osquery logs capturing the plain-text password in the command line arguments.
+Figure 9 - Osquery logs capturing the plain-text password in the command line arguments.
 
 **SOC Relevance:**
 Capturing the password (ilovedavidverve) allows the SOC to check if this credential has been reused on other compromised systems (Credential Stuffing). It also highlights a critical OPSEC failure by the attacker and a training need for administrators regarding secure command-line practices.
@@ -336,7 +340,7 @@ index=botsv3 sourcetype="WinEventLog:Security" EventCode=4720
 
 ![alt text](image-10.png)
 
-Figure 9 - Windows Security Log (Event 4720) showing the creation of the unauthorised user "svcvnc".
+Figure 10 - Windows Security Log (Event 4720) showing the creation of the unauthorised user "svcvnc".
 
 **SOC Relevance:**
 
@@ -364,7 +368,7 @@ index=botsv3 host="hoth" 1337
 
 ![alt text](image-11.png)
 
-Figure 10 - Osquery results linking Port 1337 to Process ID 14356.
+Figure 11 - Osquery results linking Port 1337 to Process ID 14356.
 
 **SOC Relevance:**
 
@@ -391,7 +395,7 @@ index=botsv3 host="FYODOR-L" "C:\\\\Windows\\\\Temp" ".exe"
 
 ![alt text](image-12.png)
 
-Figure - Sysmon Event Code 1 confirming the execution of "hdoor.exe" from the Temp directory and revealing its MD5 hash.
+Figure 12 - Sysmon Event Code 1 confirming the execution of "hdoor.exe" from the Temp directory and revealing its MD5 hash.
 
 **SOC Relevance:**
 
