@@ -181,7 +181,9 @@ The investigation began by analysing Cloud audit logs (ms:o365:management) to id
 
 **Evidence:**
 
-![alt text](image-14.png)
+![alt text](image-15.png)
+![alt text](image-16.png)
+![alt text](image-17.png)
 
 Figure 6 - Office 365 logs revealing the attacker's User Agent string.
 
