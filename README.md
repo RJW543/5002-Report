@@ -230,7 +230,10 @@ index=botsv3 sourcetype="stream:smtp"
 
 **Evidence:**
 
-![alt text](image-7.png)
+![alt text](image-19.png)
+![alt text](image-20.png)
+![alt text](image-21.png)
+![alt text](image-22.png)
 
 Figure 7 - shows the email/attachment search returning the macro-enabled document name from within the alert text.
 
