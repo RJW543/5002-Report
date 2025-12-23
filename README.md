@@ -318,7 +318,7 @@ index=botsv3 host="hoth" useradd
 
 **Evidence:**
 
-![alt text](image-9.png)
+![alt text](image-28.png)
 
 Figure 9 - Osquery logs capturing the plain-text password in the command line arguments.
 
@@ -372,7 +372,7 @@ index=botsv3 host="hoth" 1337
 
 **Evidence:**
 
-![alt text](image-11.png)
+![alt text](image-29.png)
 
 Figure 11 - Osquery results linking Port 1337 to Process ID 14356.
 
