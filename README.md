@@ -183,7 +183,9 @@ The investigation began by analysing Cloud audit logs (ms:o365:management) to id
 
 **Evidence:**
 
-Figure - Office 365 logs revealing the attacker's User Agent string.
+![alt text](image-6.png)
+
+Figure 5 - Office 365 logs revealing the attacker's User Agent string.
 
 **SOC Relevance:**
 
@@ -191,7 +193,7 @@ User Agent analysis is a key component of "Situational Awareness". Identifying a
 
 **Answer:** Mozilla/5.0 (X11; U; Linux i686; ko-KP; rv: 19.1br) Gecko/20130508 Fedora/1.9.1-2.5.rs3.0 NaenaraBrowser/3.5b4
 
-## Question 2: Delivery Vector (Malicious Attachment)
+## 5.2 Question 2: Delivery Vector (Malicious Attachment)
 
 **Objective:** Identify the malicious email attachment responsible for delivering the initial payload, using telemetry that records email/attachment metadata and contents.
 
@@ -228,7 +230,9 @@ index=botsv3 sourcetype="stream:smtp"
 
 **Evidence:**
 
-Figure - shows the email/attachment search returning the macro-enabled document name from within the alert text.
+![alt text](image-7.png)
+
+Figure 6 - shows the email/attachment search returning the macro-enabled document name from within the alert text.
 
 **SOC Relevance:**
 
@@ -242,7 +246,7 @@ Figure - shows the email/attachment search returning the macro-enabled document 
 
 **Answer:** Frothly-Brewery-Financial-Planning-FY2019-Draft.xlsm
 
-## Question 3: Installation (Embedded Executable)
+## 5.3 Question 3: Installation (Embedded Executable)
 
 **Objective:** Determine the name of the executable embedded/dropped by the malware originating from the malicious Excel macro document.
 
@@ -270,7 +274,9 @@ index=botsv3 pn="HxTsr.exe"
 
 **Evidence:**
 
-Figure
+![alt text](image-8.png)
+
+Figure 7
 
 **Figure 7 shows:**
 
@@ -291,7 +297,7 @@ Figure
 
 **Answer:** HxTsr.exe
 
-## Question 4: Persistence (Linux Account Creation)
+## 5.4 Question 4: Persistence (Linux Account Creation)
 
 **Objective:** Identify the password for the backdoor user account created by the root user on the Linux server hoth.
 
@@ -307,15 +313,16 @@ index=botsv3 host="hoth" useradd
 
 **Evidence:**
 
+![alt text](image-9.png)
+
+Figure 8 - Osquery logs capturing the plain-text password in the command line arguments.
+
 **SOC Relevance:**
-
-Figure - Osquery logs capturing the plain-text password in the command line arguments.
-
 Capturing the password (ilovedavidverve) allows the SOC to check if this credential has been reused on other compromised systems (Credential Stuffing). It also highlights a critical OPSEC failure by the attacker and a training need for administrators regarding secure command-line practices.
 
 **Answer:** ilovedavidverve
 
-## Question 5: Persistence (Windows Account Creation)
+## 5.5 Question 5: Persistence (Windows Account Creation)
 
 **Objective:** Identify the name of the user account created on the compromised Windows endpoint to establish persistence.
 
@@ -331,7 +338,9 @@ index=botsv3 sourcetype="WinEventLog:Security" EventCode=4720
 
 **Evidence:**
 
-Figure - Windows Security Log (Event 4720) showing the creation of the unauthorised user "svcvnc".
+![alt text](image-10.png)
+
+Figure 9 - Windows Security Log (Event 4720) showing the creation of the unauthorised user "svcvnc".
 
 **SOC Relevance:**
 
@@ -339,9 +348,9 @@ The username svcvnc attempts to masquerade as a legitimate "Service VNC" account
 
 **Answer:** svcvnc
 
-## Question 6: Privilege Escalation (Group Assignments) - WIP
+## 5.6 Question 6: Privilege Escalation (Group Assignments) - WIP
 
-## Question 7: Command & Control (Backdoor Port)
+## 5.7 Question 7: Command & Control (Backdoor Port)
 
 **Objective:** Determine the Process ID (PID) of the malicious process listening on the non-standard "leet" port (1337) on the Linux server.
 
@@ -357,7 +366,9 @@ index=botsv3 host="hoth" 1337
 
 **Evidence:**
 
-Figure - Osquery results linking Port 1337 to Process ID 14356.
+![alt text](image-11.png)
+
+Figure 10 - Osquery results linking Port 1337 to Process ID 14356.
 
 **SOC Relevance:**
 
@@ -365,7 +376,7 @@ Correlating network ports to Process IDs is a fundamental SOC skill. While a fir
 
 **Answer:** 14356
 
-## Question 8: Reconnaissance (Scanning Tool Identification)
+## 5.8 Question 8: Reconnaissance (Scanning Tool Identification)
 
 **Objective:** Identify the MD5 hash of the file downloaded to FYODOR-L and used to scan the Frothly network.
 
@@ -382,6 +393,8 @@ index=botsv3 host="FYODOR-L" "C:\\\\Windows\\\\Temp" ".exe"
 
 **Evidence:**
 
+![alt text](image-12.png)
+
 Figure - Sysmon Event Code 1 confirming the execution of "hdoor.exe" from the Temp directory and revealing its MD5 hash.
 
 **SOC Relevance:**
@@ -390,9 +403,9 @@ Collecting the MD5 hash (586...5D7) allows the SOC to implement the Protect phas
 
 **Answer:** 586EF56F4D8963DD546163AC31C865D7
 
-# Conclusion & Recommendations (5%)
+# 6 Conclusion & Recommendations (5%)
 
-## Incident Summary
+## 6.1 Incident Summary
 
 The investigation into the BOTSv3 dataset confirmed a sophisticated multi-stage intrusion targeting Frothly's infrastructure. The attack chain followed a clear progression:
 
@@ -401,7 +414,7 @@ The investigation into the BOTSv3 dataset confirmed a sophisticated multi-stage 
 - **Persistence & Privilege Escalation:** The attacker successfully established persistence on both Windows (creating the svcvnc admin account) and Linux (creating the tomcat7 user).
 - **Command & Control (C2):** A backdoor was established on the Linux server hoth via a non-standard port (1337) linked to a netcat-style listener.
 
-## Key Lessons & SOC Strategy Implications
+## 6.2 Key Lessons & SOC Strategy Implications
 
 The incident highlights a critical gap in Frothly's **"Protect"** phase. While the **"Detect"** capabilities (Splunk, Osquery, Sysmon) were sufficient to investigate the breach retroactively, the lack of proactive blocking mechanisms allowed the attack to succeed.
 
@@ -410,7 +423,7 @@ The incident highlights a critical gap in Frothly's **"Protect"** phase. While t
 - **Situational Awareness:** The SOC demonstrated effective Tier 2 analysis capabilities but lacked real-time alerting for high-fidelity IOCs (e.g., usage of the useradd command by root or EventCode 4720 on workstations).
 - **Defense in Depth:** The successful execution of unsigned macros indicates a failure in endpoint hardening policies, requiring a shift from "Detection-focused" to "Prevention-first" strategies where possible.
 
-## Improvements for Detection and Response
+## 6.3 Improvements for Detection and Response
 
 To mitigate future risks, the following improvements are recommended, aligned with the incident lifecycle:
 
@@ -423,7 +436,7 @@ To mitigate future risks, the following improvements are recommended, aligned wi
 - **Respond (Playbooks):**
   - Develop an automated "Isolation Playbook" in the SOAR platform to immediately quarantine endpoints exhibiting C2 behavior (e.g., outbound traffic on port 1337).
 
-# References
+# 7 References
 
 - J. Chin, _COMP5002 Module Handbook_, University of Plymouth, 2025.
 - J. Chin, "Lecture 01: Introduction to Situational Awareness," University of Plymouth, 2025.
