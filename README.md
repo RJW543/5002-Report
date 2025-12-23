@@ -59,17 +59,17 @@ BOTSv3 dataset ingested
 
 [7 References](#_Toc216969755)
 
-# Introduction
+# 2 Introduction
 
-## Context and Situational Awareness
+## 2.1 Context and Situational Awareness
 
 This report examines a suspected security incident at Frothly, a brewing company. As a Security Operations Centre (SOC) analyst, I established situational awareness of potential malicious activity within the corporate network by analysing the BOTSv3 (Boss of the SOC) dataset \[8\] using Splunk Enterprise, a Security Information and Event Management (SIEM) platform. The BOTSv3 dataset simulates a realistic enterprise environment with logs from Windows Event Logs, Sysmon, Osquery, and network stream data.
 
-## Incident Management Framework
+## 2.2 Incident Management Framework
 
 Following the NCSC Incident Management lifecycle \[9\] (Identify → Protect → Detect → Respond), this investigation focuses on Detection and Analysis. IOCs were verified through cross-referenced log analysis rather than single data points.
 
-## Objectives
+## 2.3 Objectives
 
 The specific objectives of this investigation were to:
 
@@ -80,20 +80,22 @@ The specific objectives of this investigation were to:
 
 \[10\]
 
-## Scope and Assumptions
+## 2.4 Scope and Assumptions
 
 - Scope: The analysis is limited to the telemetry provided in the BOTSv3 dataset, specifically focusing on the timeframe surrounding August 2018, where anomalous activity was detected. Key assets investigated include the workstation FYODOR-L and the Linux server hoth.
 - Assumptions: It is assumed that the log ingestion is complete for the period of the attack, though potential gaps in specific logging capabilities (e.g., missing Sysmon events for certain actions) were noted and mitigated through pivot analysis. The analysis assumes the role of a Tier 2 SOC Analyst, responsible for deep-dive investigation following initial triage.
 
-# SOC Roles & Incident Handling Reflection
+# 3 SOC Roles & Incident Handling Reflection
 
-## SOC Structure and Analyst Responsibilities
+## 3.1 SOC Structure and Analyst Responsibilities
 
 A modern Security Operations Centre (SOC) is typically tiered to manage the high volume of security telemetry effectively. In the context of the BOTSv3 exercise, the investigation required shifting between these defined roles:
 
 - **Tier 1 (Triage Specialist):** The initial phase of the investigation involved filtering high-volume logs to identify genuine anomalies. For example, identifying the initial malicious email alert required sifting through SMTP streams to find the specific "Malware Alert Text.txt" attachment.
 - **Tier 2 (Incident Responder):** The majority of this coursework simulated a Tier 2 workload. This involved deep-dive analysis, correlating distinct data points-such as linking the execution of excel.exe to the creation of the suspicious binary hdoor.exe-to construct a confirmed timeline of compromise.
 - **Tier 3 (Threat Hunter):** When standard alerts failed (e.g., missing Sysmon Event Code 11 logs for file creation), the investigation adopted a Tier 3 proactive hunting methodology. By hypothesising that malware often resides in temporary directories, a targeted file-system search for C:\\Windows\\Temp\\\*.exe successfully uncovered the embedded malware where automated alerting had gaps.
+
+![Figure - Proactive threat hunting (Tier 3) identifying malicious binaries in temporary directories.](image.png)
 
 Figure - Proactive threat hunting (Tier 3) identifying malicious binaries in temporary directories.
 
