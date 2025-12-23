@@ -95,7 +95,7 @@ A modern Security Operations Centre (SOC) is typically tiered to manage the high
 - **Tier 2 (Incident Responder):** The majority of this coursework simulated a Tier 2 workload. This involved deep-dive analysis, correlating distinct data points-such as linking the execution of excel.exe to the creation of the suspicious binary hdoor.exe-to construct a confirmed timeline of compromise.
 - **Tier 3 (Threat Hunter):** When standard alerts failed (e.g., missing Sysmon Event Code 11 logs for file creation), the investigation adopted a Tier 3 proactive hunting methodology. By hypothesising that malware often resides in temporary directories, a targeted file-system search for C:\\Windows\\Temp\\\*.exe successfully uncovered the embedded malware where automated alerting had gaps.
 
-![Figure - Proactive threat hunting (Tier 3) identifying malicious binaries in temporary directories.](image.png)
+![alt text](image-2.png)
 
 Figure - Proactive threat hunting (Tier 3) identifying malicious binaries in temporary directories.
 
