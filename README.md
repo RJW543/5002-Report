@@ -95,11 +95,11 @@ A modern Security Operations Centre (SOC) is typically tiered to manage the high
 - **Tier 2 (Incident Responder):** The majority of this coursework simulated a Tier 2 workload. This involved deep-dive analysis, correlating distinct data points-such as linking the execution of excel.exe to the creation of the suspicious binary hdoor.exe-to construct a confirmed timeline of compromise.
 - **Tier 3 (Threat Hunter):** When standard alerts failed (e.g., missing Sysmon Event Code 11 logs for file creation), the investigation adopted a Tier 3 proactive hunting methodology. By hypothesising that malware often resides in temporary directories, a targeted file-system search for C:\\Windows\\Temp\\\*.exe successfully uncovered the embedded malware where automated alerting had gaps.
 
-![Figure 1 - Proactive threat hunting (Tier 3) identifying malicious binaries in temporary directories.](image-2.png)
+![](image-2.png)
 
-Figure - Proactive threat hunting (Tier 3) identifying malicious binaries in temporary directories.
+Figure 1 - Proactive threat hunting (Tier 3) identifying malicious binaries in temporary directories.
 
-## Incident Handling Methodology
+## 3.2 Incident Handling Methodology
 
 Following the NCSC Incident Management framework \[9\] (Identify → Protect → Detect → Respond), the Frothly incident reveals the following:
 
@@ -126,9 +126,9 @@ While the coursework focuses on analysis, a live SOC response would require imme
 
 The final phase involves restoring services and applying lessons learned. The compromised hosts should be reimaged rather than cleaned \[9\], as persistence mechanisms (like the scheduled tasks or registry keys used by hdoor.exe) can be difficult to fully remove. Furthermore, the organisation must update its security posture by enforcing "Block all macros except digitally signed" policies to prevent recurrence.
 
-# Installation & Data Preparation (15%)
+# 4 Installation & Data Preparation (15%)
 
-## SOC Infrastructure & Architecture
+## 4.1 SOC Infrastructure & Architecture
 
 The forensic environment simulated a SOC Analyst Workstation:
 
@@ -137,24 +137,41 @@ The forensic environment simulated a SOC Analyst Workstation:
 
 Justification: Splunk's ability to ingest, index, and correlate unstructured machine data in real-time supports the NCSC Detect phase by enabling cross-layer correlation (e.g., linking network streams to process execution), which is impossible when analysing logs in isolation.
 
-## Dataset Ingestion Strategy
+## 4.2 Dataset Ingestion Strategy
 
 The BOTSv3 dataset was ingested using a pre-indexed app to ensure data integrity and query performance:
 
 - Installation: The BOTSv3 app was installed via Splunk Web Interface (Manage Apps > Install app from file), preserving original timestamps, sourcetypes, and host extractions
 - Index Segregation: All data was confined to index=botsv3, mirroring production SOC environments where investigation data is segregated to prevent cross-contamination and optimise search performance
 
-Figure - BOTSv3 ingested
+![](image-3.png)
 
-Figure - OneDrive activity distribution from Office 365 logs showing FileAccessed (760 events) as the dominant operation type, confirming cloud telemetry ingestion.
+Figure 2 - BOTSv3 downloaded
+
+![](image-4.png)
+
+Figure 3 - BOTSv3 ingested
+
+## 4.3 Validation & Due Diligence
+
+Prior to investigation, the dataset was verified to ensure completeness and prevent false negatives from logging gaps.
+Validation Steps Taken:
+- Sourcetype Verification: Query index=botsv3 | stats count by sourcetype confirmed presence of critical log sources: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational (endpoint visibility), stream:http (network visibility), and osquery:results (Linux visibility)
+- Timeframe Normalisation: Event timeline analysis identified a distinct activity cluster in August 2018, establishing the incident window and filtering background noise
+
+![](image-5.png)
+
+Figure 4 - OneDrive activity distribution from Office 365 logs showing FileAccessed (760 events) as the dominant operation type, confirming cloud telemetry ingestion.
+
+## 4.4 Challenges & Field Extraction
 
 Certain Splunk field extractions were inconsistent (e.g., DestinationPort in Sysmon EventCode 3 not automatically parsed), risking missed evidence. To mitigate this, the investigation employed Tier 3 Threat Hunting methodology, augmenting structured field searches with raw text searching (e.g., term("1337")) and regex-based extraction to ensure complete artifact discovery despite parsing failures.
 
-# Investigation & Findings (40%)
+# 5 Investigation & Findings (40%)
 
 This section details the forensic analysis conducted to answer the guided investigation questions (BOTSv3 300-level). Each finding is supported by a documented methodology, specific Splunk queries, and verified evidence.
 
-## Question 1: Initial Access (User Agent Identification)
+## 5.1 Question 1: Initial Access (User Agent Identification)
 
 **Objective:** Identify the User Agent string used by the attacker to upload the malicious document to the organisation's OneDrive storage.
 
