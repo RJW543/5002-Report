@@ -277,7 +277,9 @@ index=botsv3 pn="HxTsr.exe"
 
 **Evidence:**
 
-![alt text](image-8.png)
+![alt text](image-23.png)
+![alt text](image-24.png)
+![alt text](image-25.png)
 
 Figure 8
 
@@ -341,7 +343,8 @@ index=botsv3 sourcetype="WinEventLog:Security" EventCode=4720
 
 **Evidence:**
 
-![alt text](image-10.png)
+![alt text](image-26.png)
+![alt text](image-27.png)
 
 Figure 10 - Windows Security Log (Event 4720) showing the creation of the unauthorised user "svcvnc".
 
