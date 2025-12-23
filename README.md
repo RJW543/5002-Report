@@ -444,15 +444,16 @@ To mitigate future risks, the following improvements are recommended, aligned wi
 
 # 7 References
 
-- J. Chin, _COMP5002 Module Handbook_, University of Plymouth, 2025.
-- J. Chin, "Lecture 01: Introduction to Situational Awareness," University of Plymouth, 2025.
-- J. Chin, "Lecture 02: IDS and Prevention," University of Plymouth, 2025.
-- J. Chin, "Lecture 03: Intruder Behaviour & TCP Basics," University of Plymouth, 2025.
-- J. Chin, "Lecture 06: Network Traffic Analysis," University of Plymouth, 2025.
-- J. Chin, "Lecture 09: Security Information and Event Management (SIEM)," University of Plymouth, 2025.
-- J. Chin, "Lecture 11: Incident Handling," University of Plymouth, 2025.
-- Splunk Inc., "Boss of the SOC (BOTSv3) Dataset," 2018. \[Online\]. Available: <https://github.com/splunk/botsv3>.
-- NCSC, "Incident management," _ncsc.gov.uk_, 2020. <https://www.ncsc.gov.uk/collection/incident-management>
-- A. Nelson, S. Rekhi, M. Souppaya, and K. Scarfone, "Incident Response Recommendations and Considerations for Cybersecurity Risk Management":, _NIST_, Apr. 2025, doi: <https://doi.org/10.6028/nist.sp.800-61r3>.
-- vinaypamnani-msft, "4720(S) A user account was created. - Windows 10," _learn.microsoft.com_, Sep. 07, 2021. <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4720>
-- vinaypamnani-msft, "4732(S) A member was added to a security-enabled local group. - Windows 10," _learn.microsoft.com_, Sep. 07, 2021. <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4732>
+1.	J. Chin, COMP5002 Module Handbook, University of Plymouth, 2025.
+2.	J. Chin, "Lecture 01: Introduction to Situational Awareness," University of Plymouth, 2025.
+3.	J. Chin, "Lecture 02: IDS and Prevention," University of Plymouth, 2025.
+4.	J. Chin, "Lecture 03: Intruder Behaviour & TCP Basics," University of Plymouth, 2025.
+5.	J. Chin, "Lecture 06: Network Traffic Analysis," University of Plymouth, 2025.
+6.	J. Chin, "Lecture 09: Security Information and Event Management (SIEM)," University of Plymouth, 2025.
+7.	J. Chin, "Lecture 11: Incident Handling," University of Plymouth, 2025.
+8.	Splunk Inc., "Boss of the SOC (BOTSv3) Dataset," 2018. [Online]. Available: https://github.com/splunk/botsv3.
+9.	NCSC, “Incident management,” ncsc.gov.uk, 2020. https://www.ncsc.gov.uk/collection/incident-management
+10.	A. Nelson, S. Rekhi, M. Souppaya, and K. Scarfone, “Incident Response Recommendations and Considerations for Cybersecurity Risk Management”:, NIST, Apr. 2025, doi: https://doi.org/10.6028/nist.sp.800-61r3.
+11.	vinaypamnani-msft, “4720(S) A user account was created. - Windows 10,” learn.microsoft.com, Sep. 07, 2021. https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4720
+12.	vinaypamnani-msft, “4732(S) A member was added to a security-enabled local group. - Windows 10,” learn.microsoft.com, Sep. 07, 2021. https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4732
+
