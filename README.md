@@ -1,5 +1,3 @@
-Splunk initialisation
-![alt text](<Splunk initial.png>)
 
 [2 Introduction](#_Toc216969729)
 
