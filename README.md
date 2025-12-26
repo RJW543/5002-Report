@@ -57,11 +57,11 @@
 
 ## 2.1 Context and Situational Awareness
 
-This report examines a suspected security incident at Frothly, a brewing company. As a Security Operations Centre (SOC) analyst, I established situational awareness of potential malicious activity within the corporate network by analysing the BOTSv3 (Boss of the SOC) dataset \[8\] using Splunk Enterprise, a Security Information and Event Management (SIEM) platform. The BOTSv3 dataset simulates a realistic enterprise environment with logs from Windows Event Logs, Sysmon, Osquery, and network stream data.
+This report examines a suspected security incident at Frothly, a brewing company. As a Security Operations Centre (SOC) analyst, I established situational awareness of potential malicious activity within the corporate network by analysing the BOTSv3 (Boss of the SOC) dataset [8] using Splunk Enterprise, a Security Information and Event Management (SIEM) platform. The BOTSv3 dataset simulates a realistic enterprise environment with logs from Windows Event Logs, Sysmon, Osquery, and network stream data.
 
 ## 2.2 Incident Management Framework
 
-Following the NCSC Incident Management lifecycle \[9\] (Identify → Protect → Detect → Respond), this investigation focuses on Detection and Analysis. IOCs were verified through cross-referenced log analysis rather than single data points.
+Following the NCSC Incident Management lifecycle [9] (Identify → Protect → Detect → Respond), this investigation focuses on Detection and Analysis. IOCs were verified through cross-referenced log analysis rather than single data points.
 
 ## 2.3 Objectives
 
@@ -83,11 +83,11 @@ The specific objectives of this investigation were to:
 
 ## 3.1 SOC Structure and Analyst Responsibilities
 
-A modern Security Operations Centre (SOC) is typically tiered to manage the high volume of security telemetry effectively. In the context of the BOTSv3 exercise, the investigation required shifting between these defined roles:
+A modern SOC uses tiered roles to manage high-volume security telemetry. The BOTSv3 investigation required shifting between these tiers:
 
-- **Tier 1 (Triage Specialist):** The initial phase of the investigation involved filtering high-volume logs to identify genuine anomalies. For example, identifying the initial malicious email alert required sifting through SMTP streams to find the specific "Malware Alert Text.txt" attachment.
-- **Tier 2 (Incident Responder):** The majority of this coursework simulated a Tier 2 workload. This involved deep-dive analysis, correlating distinct data points-such as linking the execution of excel.exe to the creation of the suspicious binary hdoor.exe-to construct a confirmed timeline of compromise.
-- **Tier 3 (Threat Hunter):** When standard alerts failed (e.g., missing Sysmon Event Code 11 logs for file creation), the investigation adopted a Tier 3 proactive hunting methodology. By hypothesising that malware often resides in temporary directories, a targeted file-system search for C:\\Windows\\Temp\\\*.exe successfully uncovered the embedded malware where automated alerting had gaps.
+- **Tier 1 (Triage Specialist):** Filtered high-volume logs to identify genuine anomalies, such as sifting through SMTP streams to locate the "Malware Alert Text.txt" attachment 
+- **Tier 2 (Incident Responder):** Conducted deep-dive analysis, correlating data points (e.g., linking excel.exe execution to hdoor.exe creation) to construct the attack timeline
+- **Tier 3 (Threat Hunter):** When automated alerts failed (missing Sysmon EventCode 11 for file creation), employed proactive hunting by searching C:\Windows\Temp*.exe, successfully uncovering embedded malware in temporary directories (Figure 1)
 
 ![](image-2.png)
 
