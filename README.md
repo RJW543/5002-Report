@@ -356,6 +356,10 @@ The username svcvnc attempts to masquerade as a legitimate "Service VNC" account
 
 ## 5.6 Question 6: Privilege Escalation (Group Assignments) - WIP
 
+![alt text](Q6-1.png)
+![alt text](Q6-2.png)
+![alt text](Q6-3.png)
+
 ## 5.7 Question 7: Command & Control (Backdoor Port)
 
 **Objective:** Determine the Process ID (PID) of the malicious process listening on the non-standard "leet" port (1337) on the Linux server.
