@@ -37,6 +37,9 @@ WORD COUNT: 2192/2200 (2000 + 10%)
 
 ---
 
+## Video Link
+https://youtu.be/n4lK84x7n-o
+
 ## 1 Introduction
 
 ### 1.1 Context and Situational Awareness
