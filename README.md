@@ -71,6 +71,9 @@ A modern SOC uses tiered roles to manage high-volume security telemetry. The BOT
 - **Tier 2 (Incident Responder):** Conducted deep-dive analysis, correlating data points (e.g., linking excel.exe execution to hdoor.exe creation) to construct the attack timeline 
 - **Tier 3 (Threat Hunter):** When automated alerts failed (missing Sysmon EventCode 11 for file creation), employed proactive hunting by searching C:\Windows\Temp*.exe, successfully uncovering embedded malware in temporary directories (Figure 1) 
 
+![alt text](image-30.png)
+Figure 1 - Proactive threat hunting (Tier 3) identifying malicious binaries in temporary directories.
+
 ### 2.2 Incident Handling Methodology
 
 Following the NCSC Incident Management framework [9] (Identify → Protect → Detect → Respond), the Frothly incident analysis reveals:
@@ -109,6 +112,12 @@ The BOTSv3 dataset was ingested using a pre-indexed app to ensure data integrity
 1. **Installation:** The BOTSv3 app was installed via Splunk Web Interface (Manage Apps > Install app from file), preserving original timestamps, sourcetypes, and host extractions 
 2. **Index Segregation:** All data was confined to index=botsv3, mirroring production SOC environments where investigation data is segregated to prevent cross-contamination and optimise search performance
 
+![alt text](image-31.png)
+Figure 2 - BOTSv3 downloaded
+
+![alt text](image-32.png)
+Figure 3 - BOTSv3 ingested
+
 ### 3.3 Validation & Due Diligence
 
 Prior to investigation, the dataset was verified to ensure completeness and prevent false negatives from logging gaps. 
@@ -116,6 +125,9 @@ Prior to investigation, the dataset was verified to ensure completeness and prev
 **Validation Steps Taken:**
 - **Sourcetype Verification:** Query index=botsv3 | stats count by sourcetype confirmed presence of critical log sources: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational (endpoint visibility), stream:http (network visibility), and osquery:results (Linux visibility)
 - **Timeframe Normalisation:** Event timeline analysis identified a distinct activity cluster in August 2018, establishing the incident window and filtering background noise
+
+![alt text](image-33.png)
+Figure 4 - OneDrive activity distribution from Office 365 logs showing FileAccessed (760 events) as the dominant operation type, confirming cloud telemetry ingestion.
 
 ### 3.4 Challenges & Field Extraction
 
@@ -157,7 +169,10 @@ index="botsv3" sourcetype="ms:o365:management" Workload=OneDrive
 
 **Evidence:**
 
-[PLACEHOLDER FOR EVIDENCE SCREENSHOT]
+![alt text](image-34.png)
+![alt text](image-35.png)
+![alt text](image-36.png)
+Figure 5 - Office 365 logs revealing the attacker's User Agent string.
 
 **SOC Relevance:**
 
@@ -191,7 +206,11 @@ index=botsv3 sourcetype="stream:smtp" "Malware Alert Text.txt"
 
 **Evidence:**
 
-[PLACEHOLDER FOR EVIDENCE SCREENSHOT]
+![alt text](image-37.png)
+![alt text](image-38.png)
+![alt text](image-39.png)
+![alt text](image-40.png)
+Figure 6 – shows the email/attachment search returning the macro-enabled document name from within the alert text.
 
 **SOC Relevance:**
 
@@ -228,7 +247,10 @@ index=botsv3 pn="HxTsr.exe"
 
 **Evidence:**
 
-[PLACEHOLDER FOR EVIDENCE SCREENSHOT]
+![alt text](image-41.png)
+![alt text](image-42.png)
+![alt text](image-43.png)
+Figure 7 
 
 Figure 7 shows:
 - The Sysmon-based attempt returning no results (justifying the pivot).
@@ -258,8 +280,8 @@ index=botsv3 host="hoth" useradd
 ```
 
 **Evidence:**
-
-[PLACEHOLDER FOR EVIDENCE SCREENSHOT]
+![alt text](image-44.png)
+Figure 8 - Osquery logs capturing the plain-text password in the command line arguments.
 
 **SOC Relevance:**
 
@@ -281,8 +303,9 @@ index=botsv3 sourcetype="WinEventLog:Security" EventCode=4720
 ```
 
 **Evidence:**
-
-[PLACEHOLDER FOR EVIDENCE SCREENSHOT]
+![alt text](image-45.png)
+![alt text](image-46.png)
+Figure 9 - Windows Security Log (Event 4720) showing the creation of the unauthorised user "svcvnc".
 
 **SOC Relevance:**
 
@@ -304,8 +327,10 @@ index=botsv3 sourcetype="WinEventLog:Security" EventCode=4732 "svcvnc"
 ```
 
 **Evidence:**
-
-[PLACEHOLDER FOR EVIDENCE SCREENSHOT]
+![alt text](image-47.png)
+![alt text](image-48.png)
+![alt text](image-49.png)
+Figure 10 - Windows Security Log (Event 4732) confirming 'svcvnc' was added to the built-in Administrators group.
 
 **SOC Relevance:**
 
@@ -329,8 +354,8 @@ index=botsv3 host="hoth" 1337
 ```
 
 **Evidence:**
-
-[PLACEHOLDER FOR EVIDENCE SCREENSHOT]
+![alt text](image-50.png)
+Figure 11 - Osquery results linking Port 1337 to Process ID 14356.
 
 **SOC Relevance:**
 
@@ -355,8 +380,9 @@ index=botsv3 "hdoor.exe" "MD5"
 ```
 
 **Evidence:**
-
-[PLACEHOLDER FOR EVIDENCE SCREENSHOT]
+![alt text](image-51.png)
+![alt text](image-52.png)
+Figure 12 - Sysmon Event Code 1 confirming the execution of "hdoor.exe" from the Temp directory and revealing its MD5 hash.
 
 **SOC Relevance:**
 
